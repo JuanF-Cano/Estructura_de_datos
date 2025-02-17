@@ -21,25 +21,23 @@ void FillVector(int n, vector<int>* v) {
 
 void QuickSort(vector<int>* v, int left, int right) {
   if (left < right) {
-    int pivot = (*v)[left + (right - left) / 2];
-    int i = left, j = right;
-    
-    while (i <= j) {
-      while ((*v)[i] < pivot) i++;
-      while ((*v)[j] > pivot) j--;
+    int pivot = (*v)[right];
+    int i = left;
 
-      if (i <= j) {
+    for (int j = left; j < right; j++) {
+      if ((*v)[j] < pivot) {
         swap((*v)[i], (*v)[j]);
         i++;
-        j--;
       }
     }
+    swap((*v)[i], (*v)[right]);
 
-    if (left < j) QuickSort(v, left, j);
-    if (i < right) QuickSort(v, i, right);
-  }
+    QuickSort(v, left, i - 1);
+    QuickSort(v, i + 1, right);
+  } 
+  
+  return;
 }
-
 
 void printVector(const vector<int>* v) {
   for (int i = 0; i < v->size(); i++) {
@@ -51,8 +49,8 @@ void printVector(const vector<int>* v) {
 int main() {
   vector<int> original;
   vector<int> v;
-  
-  for (int i = 2; i <= 8; i++) {
+
+  for (int i = 2; i <= 7; i++) {
     original.clear();
     int size = 1;
     for (int k = 0; k < i; k++) size *= 10;
@@ -72,5 +70,5 @@ int main() {
   }
 
 
-    return 0;
+  return 0;
 }
