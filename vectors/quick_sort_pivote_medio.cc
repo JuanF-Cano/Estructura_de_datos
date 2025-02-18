@@ -50,7 +50,7 @@ void printVector(const vector<int>* v) {
 
 int main() {
   vector<int> original;
-  vector<int> v;
+  vector<int> v; 
   
   for (int i = 2; i <= 8; i++) {
     original.clear();
