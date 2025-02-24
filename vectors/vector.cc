@@ -11,7 +11,7 @@ class Vector {
     unsigned int size_;
     public:
     Vector() {
-      capacity_ = 5;
+      capacity_ = 20;
       //storage_ = (int*)malloc(sizeof(int)*capacity_);
       storage_ = new T[capacity_];
       size_ = 0;
@@ -27,15 +27,15 @@ class Vector {
     }
   private:
     void resize() {
-      unsigned int capacity2 = capacity_ * 1.5; // capacity_ + 1 || capacity_ + 2 || capacity_ * 2 || capacity_ * 1,5 || ...
-        T* newStorage = new T[capacity2];
-        for (int i = 0; i < size_; i++) {
-          newStorage[i] = storage_[i];
-        }
-        // free(storage_);
-        delete [] storage_;
-        storage_ = newStorage;
-        capacity_ = capacity2;
+      unsigned int capacity2 = capacity_ * 1.5; // capacity_ + 1 || capacity_ + 2 || capacity_ * 2 || capacity_ * 1,5 || ...OtrasOpciones
+      T* newStorage = new T[capacity2];
+      for (unsigned int i = 0; i < size_; i++) {
+        newStorage[i] = storage_[i];
+      }
+      // free(storage_);
+      delete [] storage_; // Liberar memoria anterior
+      storage_ = newStorage;
+      capacity_ = capacity2;
     }
   public:
     void push_back(const T& element) { // Se pone T& para que se cree una referencia del elemento.
@@ -45,11 +45,29 @@ class Vector {
       storage_[size_] = element;
       size_++;
     }
-    unsigned int size() {
-      return size_;
+    void push_front(const T& element) {
+      if (size_ == capacity_) {
+        resize();
+      }
+      for (int i = size_; i > 0; i--) {
+        storage_[i] = storage_[i - 1];
+      }
+      storage_[0] = element;
+      size_++;
+    }
+    void pop_front() {
+      if (size_ > 0) {
+        for (unsigned int i = 0; i < size_ - 1; i++) {
+          storage_[i] = storage_[i + 1];  // Mueve elementos a la izquierda
+        }
+        size_--;
+      }
     }
     void pop_back() {
       size_--;
+    }
+    unsigned int size() {
+      return size_;
     }
     void print() {
       for (unsigned int i = 0; i < size_; i++) {
@@ -86,17 +104,21 @@ ostream& operator<<(ostream& os, const Complex& c) { // std::ostream& operator<<
 
 int main() {
   cout << "Vectors!" << endl;
-  Vector<int> v1(10); // El "template <typename T>" hace que no se deba de poner solo Vector, sino Vector<type>
+  Vector<int> v1; // El "template <typename T>" hace que no se deba de poner solo Vector, sino Vector<type>
   Vector<char> v2(5, 'x');
   Vector<Complex> v3(5);
 
+  for (int i = 0; i < 10; i++) {
+    v1.push_back(i + 1);
+  }
+
   // v1.pop_back();
   // v1.size();
-  v1.print();
+  /* 
   v2.print();
-  v3.print();
-
-  cout << v1.at(10) << endl;
+  v3.print(); */
+  v1.push_front(8);
+  v1.print();
 
   return 0;
 }
