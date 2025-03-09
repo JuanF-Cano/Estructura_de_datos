@@ -155,7 +155,7 @@ class Vector {
   }
 };
 
-Vector<int> RemoveDuplicates(const Vector<int>& v) {
+Vector<int> removeDuplicates(const Vector<int>& v) {
   Vector<int> v2;
   bool isDuplicate;
   for (unsigned int i = 0; i < v.size(); i++) {
@@ -175,7 +175,7 @@ Vector<int> RemoveDuplicates(const Vector<int>& v) {
 }
 
 template <typename T>
-Vector<T> MergeSortedVectors(Vector<T>& v1, Vector<T>& v2) {
+Vector<T> mergeSortedVectors(Vector<T>& v1, Vector<T>& v2) {
   Vector<T> v;
   unsigned i = 0, j = 0;
   while (i < v1.size() && j < v2.size()) {
@@ -226,41 +226,41 @@ int main() {
   emptyVector.pop_back(); // should crash! 
   
   Vector<int> numbers = {1, 2, 2, 3, 4, 4, 5};
-  Vector<int> uniqueNumbers = RemoveDuplicates(numbers);
+  Vector<int> uniqueNumbers = removeDuplicates(numbers);
   
   uniqueNumbers.print(); // Expected: {1, 2, 3, 4, 5}
   
   Vector<int> numbers2 = {1,1,1,1,1,1};
-  Vector<int> uniqueNumbers2 = RemoveDuplicates(numbers2);
+  Vector<int> uniqueNumbers2 = removeDuplicates(numbers2);
   uniqueNumbers2.print(); // Expected: {1}
   
   Vector<int> numbers3 = {};
-  Vector<int> uniqueNumbers3 = RemoveDuplicates(numbers3);
+  Vector<int> uniqueNumbers3 = removeDuplicates(numbers3);
   uniqueNumbers3.print(); // Expected: {}
   
   Vector<int> numbers4 = {1};
-  Vector<int> uniqueNumbers4 = RemoveDuplicates(numbers4);
+  Vector<int> uniqueNumbers4 = removeDuplicates(numbers4);
   uniqueNumbers4.print(); // Expected: {1}
 
   Vector<int> vector1 = {1, 3, 5};
   Vector<int> vector2 = {2, 4, 6};
-  Vector<int> mergedVector = MergeSortedVectors(vector1, vector2);
+  Vector<int> mergedVector = mergeSortedVectors(vector1, vector2);
   
   mergedVector.print(); // Expected: {1, 2, 3, 4, 5, 6}
   
   Vector<int> vector3 = {1, 2, 3};
   Vector<int> vector4 = {};
-  Vector<int> mergedVector2 = MergeSortedVectors(vector3, vector4);
+  Vector<int> mergedVector2 = mergeSortedVectors(vector3, vector4);
   mergedVector2.print(); // Expected: {1, 2, 3}
   
   Vector<int> vector5 = {};
   Vector<int> vector6 = {4,5,6};
-  Vector<int> mergedVector3 = MergeSortedVectors(vector5, vector6);
+  Vector<int> mergedVector3 = mergeSortedVectors(vector5, vector6);
   mergedVector3.print(); // Expected: {4, 5, 6}
   
   Vector<int> vector7 = {1,1,1,1};
   Vector<int> vector8 = {1,1,1,1};
-  Vector<int> mergedVector4 = MergeSortedVectors(vector7, vector8);
+  Vector<int> mergedVector4 = mergeSortedVectors(vector7, vector8);
   mergedVector4.print(); // Expected: {1,1,1,1,1,1,1,1}
 
   return 0;
