@@ -199,6 +199,18 @@ Vector<T> mergeSortedVectors(Vector<T>& v1, Vector<T>& v2) {
   return v;
 }
 
+template <typename T>
+class Stack {
+  private:
+    Vector<T> storage_;
+  public:
+    void push(const T& element) { storage_.push_back(element); }
+    void pop() { assert(!storage_.empty()); storage_.pop_back(); }
+    T& top() { assert(!storage_.empty()); return storage_.at(storage_.size() - 1); }
+    bool empty() const { return storage_.empty(); }
+    unsigned int size() const { return storage_.size(); }
+};
+
 int main() {
   Vector<int> myVector;
 
