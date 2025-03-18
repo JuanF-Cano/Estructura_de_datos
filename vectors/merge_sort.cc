@@ -1,7 +1,23 @@
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <random>
 
 using namespace std;
+using namespace chrono;
+
+void FillVector(int n, vector<int>* v) {
+  v->reserve(n);
+  random_device rd;
+  mt19937 gen(rd());
+  uniform_int_distribution<int> dist(0, 1000);
+  
+  for (int i = 0; i < n; i++) {
+    v->push_back(dist(gen));
+  }
+
+  return;
+}
 
 void Merge(vector<int>* v, int left, int right, int medium) { // Función Merge para ordenar el vector
   int i = left, j = medium + 1; // Creación de los indices para los ciclos
@@ -53,19 +69,28 @@ void MergeSort(vector<int>* v) { // Función MergeSort que recibe el puntero al 
 }
 
 int main() {
-  vector<int> v = {29, 31, 2, 4, 90}; // Vector ejemplo
+  vector<int> original;
+  vector<int> v; 
+  
+  for (int i = 2; i <= 8; i++) {
+    original.clear();
+    int size = 1;
+    for (int k = 0; k < i; k++) size *= 10;
+    FillVector(size, &original);
+    cout << "10^" << i << endl;
+    
+    for (int j = 1; j <= 10; j++) {
+      v = original;
+      auto inicio = high_resolution_clock::now();
+      MergeSort(&v);
+      auto fin = high_resolution_clock::now();
+      auto duracion = duration_cast<nanoseconds>(fin - inicio);
+      cout << " -> (" << j << ") " << "Tiempo de ordenamiento: " << duracion.count() << " ns" << endl;
+    }
 
-  for(int i = 0; i < v.size(); i++) { // Mostramos los datos del vector sin ordenar
-    cout << v.at(i) << " " ;
+    cout << endl;
   }
-  cout << endl;
 
-  MergeSort(&v); // Llamada a la función principal  
-
-  for(int i = 0; i < v.size(); i++) { // Mostramos los datos del vector ordenado
-    cout << v.at(i) << " " ;
-  }
-  cout << endl;
 
   return 0;
 }
