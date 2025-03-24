@@ -15,8 +15,8 @@ class List {
           data_ = T();
           next_ = nullptr;
         }
-        Node(const T& d) {
-          data_ = d;
+        Node(const T& element) {
+          data_ = element;
           next_ = nullptr;
         }
         Node* GetNext() { return next_; }
