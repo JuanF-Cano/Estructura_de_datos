@@ -40,41 +40,42 @@ class List {
     List(const List<T>& list) {
       assert(list.size() > 0);
       Node* p = list.first_;
-      first_ = new Node(p->GetElement());
-      last_ = first_;
-      
-      Node* n = first_;
-      p = p->GetNext();
-
+      first_ = new Node(p->GetElement()); 
+      last_ = first_; 
+  
+      Node* current = first_; 
+      p = p->GetNext(); 
+  
       while (p != nullptr) {
-        n = new Node(p->GetElement());
-        n = n->GetNext();
-        p = p->GetNext();
+        current->SetNext(new Node(p->GetElement())); 
+        current = current->GetNext(); 
+        p = p->GetNext(); 
       }
-
-      last_ = n;
+  
+      last_ = current; 
       size_ = list.size();
     }
     List& operator=(const List& list) {
-      assert(list.size() > 0);
+      if (list.size() == 0) return *this;
+      
       Node* p = list.first_;
       first_ = new Node(p->GetElement());
       last_ = first_;
-      
-      Node* n = first_;
-      p = p->GetNext();
+
+      Node* current = first_; 
+      p = p->GetNext(); 
 
       while (p != nullptr) {
-        n = new Node(p->GetElement());
-        n = n->GetNext();
-        p = p->GetNext();
+        current->SetNext(new Node(p->GetElement())); 
+        current = current->GetNext(); 
+        p = p->GetNext(); 
       }
-      
-      last_ = n;
+
+      last_ = current;
       size_ = list.size();
 
       return *this;
-    }
+    }  
     unsigned int size() const { return size_; }
     bool empty() { return (first_ == nullptr); } // return (size == 0) }
     void push_front(const T& element) {
