@@ -41,7 +41,6 @@ class List {
       assert(list.size() > 0);
       Node* p = list.first_;
       first_ = new Node(p->GetElement()); 
-      last_ = first_; 
   
       Node* current = first_; 
       p = p->GetNext(); 
@@ -60,7 +59,6 @@ class List {
       
       Node* p = list.first_;
       first_ = new Node(p->GetElement());
-      last_ = first_;
 
       Node* current = first_; 
       p = p->GetNext(); 
