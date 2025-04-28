@@ -233,7 +233,7 @@ private:
       }
     }
 
-    if (root != nullptr) fixRemove(root_, root);
+    if (root && root->getColor() == BLACK) fixRemove(root_, root);
 
     return root;
   }
